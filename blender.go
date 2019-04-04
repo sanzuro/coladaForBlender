@@ -20,16 +20,16 @@ func main() {
 		fmt.Printf(`" ><mesh>`)
 		fmt.Printf(`<source id="Plane_00`)
 		fmt.Printf("%d", i)
-		fmt.Printf(`mesh-positions">`)
-		fmt.Printf(`<float_array id="Plane`)
+		fmt.Printf(`-mesh-positions">`)
+		fmt.Printf(`<float_array id="Plane_00`)
 		fmt.Printf("%d", i)
-		fmt.Printf(`mesh-positions-array" count="12"> `)
+		fmt.Printf(`-mesh-positions-array" count="12"> `)
 		for j := 0; j < 12; j++ {
-			fmt.Printf("%f ", rand.Float32())
+			fmt.Printf("%d ", rand.Intn(2))
 		}
 		fmt.Printf(`</float_array>`)
 		fmt.Printf(`<technique_common>`)
-		fmt.Printf(`<accessor source="#Plane`)
+		fmt.Printf(`<accessor source="#Plane_00`)
 		fmt.Printf("%d", i)
 		fmt.Printf(`-mesh-positions-array" count="4" stride="3">`)
 		fmt.Printf(`<param name="X" type="float"/>
@@ -38,10 +38,10 @@ func main() {
 	        </accessor>
         	</technique_common>
             </source>
-			<source id="Plane`)
+			<source id="Plane_00`)
 		fmt.Printf("%d", i)
 		fmt.Printf(`-mesh-normals">`)
-		fmt.Printf(`<float_array id="Plane`)
+		fmt.Printf(`<float_array id="Plane_00`)
 		fmt.Printf("%d", i)
 		fmt.Printf(`-mesh-normals-array" count="3">`)
 		for j := 0; j < 3; j++ {
@@ -54,7 +54,7 @@ func main() {
 		// -- this
 		fmt.Printf(`</float_array>`)
 		fmt.Printf(`<technique_common>
-					  <accessor source="#Plane`)
+					  <accessor source="#Plane_00`)
 		fmt.Printf("%d", i)
 		fmt.Printf(`-mesh-normals-array" count="1" stride="3">`)
 		fmt.Printf(` <param name="X" type="float"/>
@@ -63,11 +63,11 @@ func main() {
             	     	  </accessor>
               				</technique_common>
 						     </source>
-								<vertices id="Plane`)
+								<vertices id="Plane_00`)
 
 		fmt.Printf("%d", i)
 		fmt.Printf(`-mesh-vertices">`)
-		fmt.Printf(`<input semantic="POSITION" source="#Plane`)
+		fmt.Printf(`<input semantic="POSITION" source="#Plane_00`)
 		fmt.Printf("%d", i)
 		fmt.Printf(`-mesh-positions"/>
       		 		 </vertices>
@@ -76,7 +76,7 @@ func main() {
         			  <input semantic="NORMAL" source="#Plane-mesh-normals" offset="1"/>
 						  <p>`)
 		for j := 0; j < 12; j++ {
-			fmt.Printf("%d ", rand.Intn(10))
+			fmt.Printf("%d ", rand.Intn(2))
 		}
 		fmt.Printf(`</p>
     	 			   </triangles>
@@ -98,8 +98,10 @@ func main() {
 
 		fmt.Printf(`<instance_geometry url="#Plane_00`)
 		fmt.Printf("%d", i)
-		fmt.Printf(`-mesh" name="Plane"/>
-					</node>`)
+		fmt.Printf(`-mesh" name="Plane_00`)
+		fmt.Printf("%d", i)
+		fmt.Printf(`"/>
+				      	</node>`)
 	}
 	fmt.Printf(`  </visual_scene>
 	             </library_visual_scenes>
