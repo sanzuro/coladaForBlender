@@ -17,7 +17,7 @@ func main() {
 		fmt.Printf("%d", i)
 		fmt.Printf(`-mesh" name= "Plane_00`)
 		fmt.Printf("%d", i)
-		fmt.Printf(`<mesh>`)
+		fmt.Printf(`" ><mesh>`)
 		fmt.Printf(`<source id="Plane_00`)
 		fmt.Printf("%d", i)
 		fmt.Printf(`mesh-positions">`)
