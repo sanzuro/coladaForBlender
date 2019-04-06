@@ -82,7 +82,8 @@ func Ccircle(c Point, p Point, r float64) {
 		_ = i
 		_ = iVal
 		//fmt.Printf("%+v \n", iVal)
-		n := xRot(yRot(zRot(iVal)))
+		// n := xRot(yRot(zRot(iVal)))
+		n := Rot(iVal)
 		fmt.Printf("  %f %f %f", n.X, n.Y, n.Z)
 
 	}
@@ -98,10 +99,13 @@ func main() {
 		  <mesh>
 			<source id="Circle-mesh-positions">
 			  <float_array id="Circle-mesh-positions-array" count="768">  `)
-	t := Point{2.0, -1.3, 2.5}
+	t := Point{1.0, 3.4, 5.6}
 	z := Point{0.0, 0.0, 1.0}
 	// fmt.Printf("%+v %+v\n", t, z)
+	rotAngle = 0
+	unit = t.Unit()
 	Ccircle(t, z, 1)
+
 	fmt.Printf(`</float_array>
 		<technique_common>
 		  <accessor source="#Circle-mesh-positions-array" count="256" stride="3">
@@ -144,4 +148,23 @@ func main() {
 	<instance_visual_scene url="#Scene"/>
 	</scene>
 	</COLLADA>`)
+}
+
+var rotAngle float64
+var unit Point
+
+// Rot ... this is combination of indevidual roations
+func Rot(t Point) Point {
+	var v Point
+	ca := math.Cos(rotAngle)
+	sa := math.Sin(rotAngle)
+	var x, y, z float64
+	x, y, z = unit.X, unit.Y, unit.Z
+	// stuff
+	// the new rotation technique based on quaternion formulas and other things
+	// cirulation the points over this
+	v.X = (ca+x*x*(1-ca))*t.X + (x*y*(1-ca)-z*sa)*t.Y + (x*z*(1-ca)-y*sa)*t.Z
+	v.Y = (y*x*(1-ca)+z*sa)*t.X + (ca+y*y*(1-ca))*t.Y + (y*z*(1-ca)-x*sa)*t.Z
+	v.Z = (z*x*(1-ca)+y*sa)*t.X + (z*y*(1-ca)-x*sa)*t.Y + (ca+z*z*(1-ca))*t.Z
+	return v
 }
